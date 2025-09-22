@@ -1,0 +1,24 @@
+header{
+    height:10vh;
+    background-color: #282c34;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    height: 60vh;
+    background-color: #012366;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer{
+    height: 30vh;   
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
