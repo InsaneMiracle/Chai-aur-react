@@ -1,6 +1,7 @@
 import { use, useCallback, useEffect, useId, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import "./App.css";
+import CrossIcon from "./assets/cross-circle-svgrepo-com.svg";
 
 function App() {
   const [length, setlength] = useState(6);
@@ -10,7 +11,18 @@ function App() {
   const [savedPassword, setSavedPassword] = useState([]);
 
   const passowrdRef = useRef(null);
-  const passId = useId;
+
+  const CloseIcon = ({ onClick }) => (
+    <svg
+      onClick={onClick}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-6 h-6 m-2 text-amber-400 hover:text-amber-600 transition-colors duration-200 cursor-pointer"
+    >
+      <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 10.5858L15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858Z" />
+    </svg>
+  );
 
   const passwordGenerator = useCallback(() => {
     let chars = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
@@ -24,6 +36,12 @@ function App() {
     }
     setpassword(password);
   }, [length, numberAllowed, symbolAllowed, setpassword]);
+
+    const deletePassword = useCallback((passToDelete) => {
+    setSavedPassword(prev => prev.filter(p => p !== passToDelete));
+    toast.success("Password deleted.");
+  }, []);
+
 
   const copyPasswordToClipboard = useCallback(() => {
     if (savedPassword.length < 5) {
@@ -94,6 +112,7 @@ function App() {
                 defaultChecked={numberAllowed}
                 id="numberInput"
                 onChange={(e) => setNumberAllowed((prev) => !prev)}
+                className="accent-amber-400 cursor-pointer"
               />
               <label htmlFor="numberInput"> Numbers</label>
             </div>
@@ -104,6 +123,7 @@ function App() {
                 defaultChecked={symbolAllowed}
                 id="symbolInput"
                 onChange={(e) => setSymbolAllowed((prev) => !prev)}
+                className="accent-amber-400 cursor-pointer"
               />
               <label htmlFor="symbolInput"> Characters</label>
             </div>
@@ -114,13 +134,15 @@ function App() {
           <h1 className="text-2xl font-bold  mb-6"> SAVED PASSWORDS</h1>
           {savedPassword.length > 0 ? (
             savedPassword.map((e, index) => (
-              <input
-                key={index}
-                type="text"
-                value={e}
-                readOnly
-                className=" w-110 text-lg outline-none bg-slate-800 py-3 px-4 my-2 selection:bg-amber-400 selection:text-white focus:outline-none focus:ring-1 focus:ring-amber-400 rounded-lg focus:shadow-2xl focus:shadow-amber-300/20 transition-all duration-300"
-              />
+              <div key={index} className="flex w-108 items-center justify-evenly my-2 bg-slate-800 rounded-lg">
+                <input
+                  type="text"
+                  value={e}
+                  readOnly
+                  className=" sticky w-100 text-lg outline-none bg-slate-800 py-3 px-4 selection:bg-amber-400 selection:text-white focus:outline-none focus:ring-1 focus:ring-amber-400 rounded-lg focus:shadow-2xl focus:shadow-amber-300/20 transition-all duration-300"
+                />
+                <CloseIcon  onClick={() => deletePassword(e)}/>
+              </div>
             ))
           ) : (
             <h2 className="font-white">No passwords saved yet</h2>
