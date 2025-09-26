@@ -26,7 +26,9 @@ function App() {
   return (
     <>
      <div>
+      
       <h1>Counter : {count}</h1>
+
       {count === 0 ? <h3 style={{color:"red"}}>Minimum value reached</h3> : null}
       {count === 20 ? <h3 style={{color:"green"}}>Maximum value reached</h3> : null}
      </div>
