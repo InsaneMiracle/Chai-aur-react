@@ -1,7 +1,6 @@
-import { use, useCallback, useEffect, useId, useRef, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import {  useCallback, useEffect, useRef, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import "./App.css";
-import CrossIcon from "./assets/cross-circle-svgrepo-com.svg";
 
 function App() {
   const [length, setlength] = useState(6);
