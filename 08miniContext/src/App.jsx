@@ -1,15 +1,19 @@
 
 import './App.css'
+import Login from './components/Login'
+import Profile from './components/Profile'
 import UserContextProvider from './context/UserContextProvider'
 
 function App() {
 
   return (
     <UserContextProvider>
-    <div className='h-screen w-screen flex justify-center items-center bg-red-800 '>
-      <h1 className='font-bold text-9xl'>Greetings HELLO</h1>
-    </div>
+      <div className=' w-screen h-screen flex flex-col justify-center items-center gap-4 bg-gray-600'>
+        <Login />
+        <Profile />
+      </div>
     </UserContextProvider>
+ 
   )
 }
 
