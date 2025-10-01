@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react"
 import { useTodo } from "../context";
 
 function TodoItem({ todo }) {
