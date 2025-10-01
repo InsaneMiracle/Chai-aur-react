@@ -1,4 +1,4 @@
-import {  useCallback, useEffect, useRef, useState } from "react";
+import {  use, useCallback, useEffect, useRef, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import "./App.css";
 
@@ -67,6 +67,19 @@ function App() {
   useEffect(() => {
     passwordGenerator();
   }, [length, numberAllowed, symbolAllowed, passwordGenerator]);
+
+  useEffect(() => {
+    const passwords = JSON.parse(localStorage.getItem("savedPassword"));
+    if (passwords && passwords.length > 0) {
+      setSavedPassword(passwords);
+    }
+
+  }, [setSavedPassword]);
+
+  useEffect(() => {
+    localStorage.setItem("savedPassword", JSON.stringify(savedPassword));
+  }, [savedPassword]);
+
 
   return (
     <>
