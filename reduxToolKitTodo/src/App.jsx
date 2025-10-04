@@ -1,9 +1,12 @@
 import './App.css'
+import AddTodo from './components/AddTodo'
+import Todos from './components/Todos'
 
 function App() {
   return (
-    <div className=' flex flex-col items-center justify-center h-screen bg-gray-100'>
-      <h1>Redux Toolkit Todo App</h1>
+    <div className=' flex flex-col items-center  h-screen bg-gray-600'>
+      <AddTodo />
+      <Todos />
     </div>
    
   )
